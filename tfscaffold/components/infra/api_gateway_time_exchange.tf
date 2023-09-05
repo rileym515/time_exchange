@@ -44,7 +44,7 @@ resource "aws_api_gateway_integration" "time_exchange" {
   resource_id             = aws_api_gateway_resource.time_exchange.id
   http_method             = aws_api_gateway_method.time_exchange.http_method
   type                    = "AWS_PROXY"
-  uri                     = "arn:aws:apigateway:${var.region}:lambda:path/2015-03-31/functions/${aws_lambda_function.time_exchange.arn}/invocations"
+  uri                     = aws_lambda_function.time_exchange.invoke_arn
   integration_http_method = "POST"
 }
 

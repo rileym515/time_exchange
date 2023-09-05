@@ -70,6 +70,7 @@ Once the pending connection has been completed then you can run the CodePipeline
 The infra component (in tfscaffold) has all the resources for the application - these are deployed by the pipeline.
 
 There is a simple automated test at the end of the pipeline to check the API Gateway response.
+- There seems to be a bug which means that the test will fail to get the API key on the initial run of the pipeline - this is inconsistent and if it does happen a rerun of the pipeline seems to reolve it.
 
 ### Clean up
 

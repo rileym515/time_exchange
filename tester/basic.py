@@ -8,8 +8,6 @@ apiclient = boto3.client('apigateway')
 def getKey(key_id):
 
     api_key = apiclient.get_api_key(apiKey=key_id, includeValue=True)
-    print("API Key response"
-    print(api_key)
     return api_key["value"]
 
 def hitApi(key_value, api_url):

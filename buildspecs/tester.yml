@@ -4,6 +4,7 @@ phases:
   build:
     commands:
       - echo Build phase for TESTER started at $(date)
+      - tail -20 tfscaffold/tf_apply.out
       - aurl=$(grep "api_url =" tfscaffold/tf_apply.out | cut -d "=" -f2)
       - akey=$(grep "key_id =" tfscaffold/tf_apply.out | cut -d '=' -f2)
       - python3 tester/basic.py -a ${aurl} -k ${akey}
