@@ -28,7 +28,7 @@ Authenticated access to an AWS account via CLI with an Administrator IAM permiss
 
 Clone the repo to local machine and edit tfscaffold/etc/global.tfvars
 - Set aws_account_id to the account number in which you are working
-- Optionally set the region - this defaults to us-east-2
+- Set the region as required for bootstrap
 
 *You will need the appropriate versions of Terraform installed locally to complete the bootstrap and pipeline deployments. The required versions can be found in .terraform-version files in the relative directories. Alternatively you can use tfenv as the pipeline does to get the right version of Terraform installed.*
 
@@ -48,6 +48,9 @@ Check the bootstrap plan is creating an S3 bucket and if it looks OK then apply
 
 The pipeline and supporting components are deployed from a local machine much like bootstrapping.
 
+Change directory into the tfscaffold directory
+- cd tfscaffold
+
 Run a plan to check what is being deployed - this includes IAM roles, CodePipeline, CodeBuild jobs and an S3 bucket for pipeline artifacts
 - bin/terraform.sh -a plan -p risk101 -r us-east-2 -c pipeline -e dev1 -w --
 
@@ -56,9 +59,13 @@ If everything looks as expected then apply
 
 Once the apply of the pipeline component is complete you can check for the resources using either the AWS CLI or console.
 
-*New CodePipeline jobs run immediately after deployment for the first time so you shouldn't need to kick of the pipeline to begin the deployment of the infra*
+*Once the pipeline apply is complete there is a manual step to complete the configuration of the CodeStar Connection which has been created to allow the pipeline to pull the repo from GitHub*
+https://docs.aws.amazon.com/dtconsole/latest/userguide/connections-update.html
+Note the initial creation of an AWS CodePipeline job triggers the job to run but it will fail to checkout the code until the above step is complete.
 
 #### Infra and Application
+
+Once the pending connection has been completed then you can run the CodePipeline job from the console or CLI
 
 The infra component (in tfscaffold) has all the resources for the application - these are deployed by the pipeline.
 

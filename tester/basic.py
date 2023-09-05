@@ -8,6 +8,8 @@ apiclient = boto3.client('apigateway')
 def getKey(key_id):
 
     api_key = apiclient.get_api_key(apiKey=key_id, includeValue=True)
+    print("API Key response"
+    print(api_key)
     return api_key["value"]
 
 def hitApi(key_value, api_url):
@@ -44,8 +46,10 @@ def set_vars(argv):
             sys.exit()
         elif opt == ('-a'):
             api_url = arg.replace('"','')
+            print(f"API URL is - {api_url}")
         elif opt == ('-k'):
             key_id = arg.replace('"','')
+            print(f"Key ID is - {key_id}")
 
     controller(api_url, key_id)
 
