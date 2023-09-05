@@ -1,0 +1,55 @@
+env.sh
+
+### Terraform ###
+# Compiled files
+**/*.tfstate
+**/*.tfplan
+**/*.tfstate.backup
+**/.terraform
+**/.terraform.lock.hcl
+**/.terraform/*
+
+# Scaffold Plugin Cache
+**/plugin-cache/*
+
+# Artifacts
+*.zip
+
+### OSX ###
+**/.DS_Store
+**/.AppleDouble
+**/.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+*.swp
+node_modules
+.nyc_output
+src/taa-api-mock-lambda/app/dist/
+coverage
+
+# VS Code
+.vscode
+
+#IntelliJ Idea
+.idea
+*.iml

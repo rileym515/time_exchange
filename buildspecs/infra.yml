@@ -1,0 +1,31 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      # tfenv is an opensource utility for managing Terraform versions
+      - echo Installing  tfenv
+      - git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+      - export PATH="$HOME/.tfenv/bin:$PATH"
+      - which tfenv
+      - ls -l $HOME/.tfenv/bin
+  pre_build:
+    commands:
+      - echo Check for artifacts list
+      - ls -l artifacts/
+      - FILENAME=$(cat artifacts/list.yml)
+  build:
+    commands:
+      - echo Build phase for INFRA started at $(date)
+      - echo Action is ${action}
+      - cd tfscaffold
+      # Here we need to get the exit code of the TF scaffold command not the tee so we include the PIPESTATUS
+      - (bash bin/terraform.sh -a ${action} -p ${project} -r ${region} -c ${target} -e ${environment} -w -- -var="compiled_python=../../../artifacts/${FILENAME}" | tee tf_${action}.out ; exit ${PIPESTATUS[0]})
+
+  post_build:
+    commands:
+      - echo Post build completed on `date`
+artifacts:
+  files:
+    - '**/*'
+  name: tf_outputs
