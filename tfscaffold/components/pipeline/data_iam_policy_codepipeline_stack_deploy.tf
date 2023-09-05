@@ -6,6 +6,7 @@ data "aws_iam_policy_document" "codepipeline_stack_deploy" {
     actions = [
       "codebuild:*",
       "codecommit:*",
+      "codestar-connections:*",
       "s3:*",
     ]
 

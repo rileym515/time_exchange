@@ -14,19 +14,19 @@ resource "aws_codepipeline" "stack_deploy" {
     name = "Source"
 
     action {
-      name             = "AnsibleSource"
+      name             = "Source"
       category         = "Source"
       owner            = "AWS"
-      provider         = "CodeCommit"
+      provider         = "CodeStarSourceConnection"
       version          = "1"
       output_artifacts = ["source"]
 
       configuration = {
-        ## TODO - this must be GitHub long term
-        RepositoryName       = "mr_time_exchange"
-        PollForSourceChanges = "false"
-        BranchName           = "master"
+        ConnectionArn    = aws_codestarconnections_connection.github.arn
+        FullRepositoryId = "rileym515/time_exchange"
+        BranchName       = "main"
       }
+
     }
   }
 

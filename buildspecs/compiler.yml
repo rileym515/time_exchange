@@ -4,9 +4,6 @@ phases:
   build:
     commands:
       - echo Build phase for COMPILER started at $(date)
-      - echo The current directory is ...
-      - export CODEDIR=$(pwd)
-      - ls -la
       - cd application ; ls -la
       - FILENAME="time_exchange-$(date +'%d%m%Y%H%M').zip" 
       - zip ../artifacts/${FILENAME} time_exchange.py
@@ -14,7 +11,7 @@ phases:
   post_build:
     commands:
       - echo Post build completed on $(date)
-      - cd .. ; ls -la artifacts/
+      - ls -la ../artifacts/
 artifacts:
   files:
     - '**/*'

@@ -14,11 +14,6 @@ variable "region" {
   default     = "us-east-2"
 }
 
-variable "aws_account_id" {
-  type        = string
-  description = "The AWS Account ID into which we are bootstrapping tfscaffold"
-}
-
 variable "default_tags" {
   type        = map(string)
   description = "A map of default tags to apply to all taggable resources within the component"
